@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <title>Narrow Down Your Menu Choice</title>
+    <script src= "https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="angular-js/menuchoice.js"></script>
+    <style>
+      
+       body{
+        font-size: 1.2em;
+               background: #f0fdfa;
+               margin: 6%;
+
+        }
+    
+    input{
+         border-radius: 3px;
+         background-color: #ffffff;
+         }
+    button{
+                 border-radius: 3px;
+          background-color:  #97dee7; 
+          }  
+
+    </style>
+ </head>
+
+
+<body ng-app="myApp">
+   <div class="container" ng-controller="NarrowItDownController as menu">
+
+
+    <h1>Narrow Down Your Chinese Menu Choice</h1>
+    <p>Try to search keywords like curry, chicken, orange etc. Check whether the entered item is available or not by clicking the button. THANKS</p>
+    
+
+    <div class="form-group">
+      <input ng-model="menu.searchTerm"  type="text" placeholder="search term" class="form-control">
+    </div>
+
+    <div class="form-group narrow-button">
+      <button ng-click = "menu.butt();"  class="btn btn-primary">Narrow It Down For Me!</button>
+    </div>
+
+
+
+    <ol>
+      <li ng-repeat = "menu_items in menu.categories track by $index">
+      <b>ShortName:</b> {{menu_items.short_name}}, <b>Name:</b> {{menu_items.name}}, <b>Description:</b> {{menu_items.description}}
+      <button ng-click="menu.remove1($index,menu.categories);" type="button" name="button">Don't want this one!</button>
+      </li>
+    </ol>
+
+
+
+    <!-- found-items should be implemented as a component found-items="menu.categories" on-remove="menu.remove1" -->
+    <found-items ></found-items>
+    <h1 ng-if= "menu.categories==0" >Nothing Found!</h1>
+  </div>
+
+</body>
+</html>
